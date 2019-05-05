@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="MyApp">
-  <head></head>
+<html xmlns:ng="http://angularjs.org" ng-app="myApp" ng-strict-di>
   <body>
     <div ng-controller="MinesweeperController">
       <table border="1">
@@ -11,8 +10,19 @@
         </tr>
       </table>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js"></script>
+    <script src="assets/js/angular.min.js"></script>
     <script>
+      angular.module("myApp", []).controller("MinesweeperController", [
+        "$scope",
+        function($scope) {
+          $scope.minefield = createMinefield();
+        }
+      ]);
+
+      angular.element(function() {
+        angular.bootstrap(document, ["myApp"]);
+      });
+
       function createMinefield() {
         var minefield = {};
         minefield.rows = [];
@@ -31,10 +41,6 @@
         }
 
         return minefield;
-      }
-
-      function MinesweeperController($scope) {
-        $scope.minefield = createMinefield();
       }
     </script>
   </body>
